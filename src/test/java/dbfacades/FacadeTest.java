@@ -58,18 +58,19 @@ DemoFacade facade = new DemoFacade(emf);
       Assert.assertEquals(1, carsByMake.size());
   }
   
-  @Test
-  public void testGetCarById(){
-      int id = 1;
-      Car carById = facade.getCarById(id);
-      Assert.assertEquals("Volvo", carById.getMake());
-  }
-  
+//  @Test
+//  public void testGetCarById(){
+//      int id = 1;
+//      Car carById = facade.getCarById(id);
+//      Assert.assertEquals("Volvo", carById.getMake());
+//  }
+//  
   @Test
   public void testDeleteCarByID(){
-      int id = 1;
+      int id = facade.getAllCars().size();
+      int expected = id - 1;
       List<Car> carsById = facade.deleteCarByID(id);
-      Assert.assertEquals("Volvo", carsById.get(0).getMake());
+      Assert.assertEquals(expected, carsById.size());
   }
 
 //  // Test the single method in the Facade

@@ -48,7 +48,7 @@ public class DemoFacade {
         }
 //    throw new UnsupportedOperationException("FIX ME");
     }
-    
+
     public List<Car> getCarsByMake(String make) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -62,24 +62,22 @@ public class DemoFacade {
             em.close();
         }
     }
-    
+
     public Car getCarById(int id) {
         EntityManager em = emf.createEntityManager();
-        //try {
-            //em.getTransaction().begin();
-            Query q = em.createQuery("SELECT m FROM Car m WHERE m.id = :id");
-            q.setParameter("id", id);
-            Car car = (Car) q.getSingleResult();
-            return car;
-            //em.getTransaction().commit();
-            //return carById;
-        //} finally {
-        //    em.close();
-        //}
+        Query q = em.createQuery("SELECT m FROM Car m WHERE m.id = :id");
+        q.setParameter("id", id);
+        Car car = (Car) q.getSingleResult();
+        return car;
     }
-    
+
     public List<Car> deleteCarByID(int id) {
-        throw new UnsupportedOperationException("Create this method");
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createQuery("DELETE FROM Car m WHERE m.id = :id");
+        q.setParameter("id", id);
+        q.executeUpdate();
+        List<Car> carList = getAllCars();
+        return carList;
     }
 
 //  /*
