@@ -73,9 +73,10 @@ public class DemoFacade {
 
     public List<Car> deleteCarByID(int id) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("DELETE FROM Car m WHERE m.id = :id");
-        q.setParameter("id", id);
-        q.executeUpdate();
+        Car car = em.find(Car.class, id);
+        em.getTransaction().begin();
+        em.remove(car);
+        em.getTransaction().commit();
         List<Car> carList = getAllCars();
         return carList;
     }
